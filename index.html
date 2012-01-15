@@ -51,10 +51,15 @@
 			}
 		}
 
-		options['onImageLoad'] = function() {
+		options['beforeAnimation'] = function() {
 
-				console.log('test');
-			}
+			console.log('before animation');
+		}
+
+		options['afterAnimation'] = function(a) {
+
+			console.log('after animation', a);
+		}
 		
 		$('.box_skitter_large').skitter(options);
 		
