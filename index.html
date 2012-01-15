@@ -21,7 +21,7 @@
 	<script src="js/jquery.easing.1.3.js"></script>
 	<script src="js/jquery.animate-colors-min.js"></script>
 	
-	<script src="js/jquery.skitter.min.js"></script>
+	<script src="js/jquery.skitter.js"></script>
 	<script src="js/highlight.js"></script>
 	<script src="js/sexy-bookmarks-public.js"></script>
 	
@@ -50,6 +50,11 @@
 				}
 			}
 		}
+
+		options['onImageLoad'] = function() {
+
+				console.log('test');
+			}
 		
 		$('.box_skitter_large').skitter(options);
 		

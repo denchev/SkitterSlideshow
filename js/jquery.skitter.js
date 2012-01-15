@@ -85,8 +85,8 @@
 										+ '<a href=""><img class="image_main" /></a>'
 										+ '<div class="label_skitter"></div>'
 									+ '</div>'
-								+ '</div>'
-		
+								+ '</div>',
+		onImageLoad:			null // Callback: Run when image animation is over
 	};
 	
 	$.skitter = function(obj, options, number) {
@@ -1984,6 +1984,10 @@
 				this.timer = setTimeout(function() { self.completeMove(); }, this.settings.interval);
 			}
 			
+			if(typeof this.settings.onImageLoad === 'function') {
+
+				self.settings.onImageLoad();
+			}
 			self.startTime();
 		},
 
