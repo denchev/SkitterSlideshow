@@ -11,10 +11,10 @@
  * @example http://thiagosf.net/projects/jquery/skitter/
  */
 
+var skitters = [];
 (function($) {
 	
-	var number_skitter = 0,
-		skitters = [];
+	var number_skitter = 0;
 	
 	$.fn.skitter = function(options) {
 		return this.each(function() {
@@ -86,7 +86,8 @@
 										+ '<div class="label_skitter"></div>'
 									+ '</div>'
 								+ '</div>',
-		onImageLoad:			null // Callback: Run when image animation is over
+		afterAnimation:			null, // Callback: Run when image animation is over
+		beforeAnimation:		null // Callback: Run before animation starts
 	};
 	
 	$.skitter = function(obj, options, number) {
@@ -607,6 +608,11 @@
 			{
 				var random_id = parseInt(Math.random() * animations_functions.length);
 				animation_type = animations_functions[random_id];
+			}
+
+			if(typeof self.settings.beforeAnimation === 'function') {
+
+				self.settings.beforeAnimation();
 			}
 			
 			switch (animation_type) 
@@ -1984,10 +1990,11 @@
 				this.timer = setTimeout(function() { self.completeMove(); }, this.settings.interval);
 			}
 			
-			if(typeof this.settings.onImageLoad === 'function') {
+			if(typeof this.settings.afterAnimation === 'function') {
 
-				self.settings.onImageLoad();
+				self.settings.afterAnimation(this.settings.image_i == 0 ? this.settings.images_links.length : this.settings.image_i);
 			}
+
 			self.startTime();
 		},
 
